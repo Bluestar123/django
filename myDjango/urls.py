@@ -16,14 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from first import views
+from first.views import onemore as views1
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
-    path('first', views.index, name='first'),
-    path('first/get_user', views.post, name='getuser'),
-    path('login', views.get_csrf),
+    # path('admin/', admin.site.urls, name='admin'),
+    # path('first', views.index, name='first'),
+    # path('first/get_user', views.post, name='getuser'),
+    # path('login', views.get_csrf),
 
-    path('add_book', views.add_book),
-    path('get_book', views.get_book),
-    path('get_book_by_id', views.get_book_by_id)
+    # path('add_book', views.add_book),
+    # path('get_book', views.get_book),
+    # path('get_book_by_id', views.get_book_by_id),
+
+
+    path('add_book1', views1.add_book),
+    path('add_author', views1.add_author)
 ]

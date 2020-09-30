@@ -5,18 +5,18 @@ class Book1(models.Model):
   price = models.DecimalField(max_digits=5, decimal_places=2)
   pub_date = models.DateField()
   publish = models.ForeignKey('Publish', on_delete=models.CASCADE)
-  authors = models.ManyToManyField('Author') # 一本书多作者
+  authors = models.ManyToManyField('Author') # 一本书多作者, 一个作者多本书
 
 
 class Publish(models.Model):
   name = models.CharField(max_length=32)
-  city = models.CarField(max_length=64)
+  city = models.CharField(max_length=64)
   email = models.EmailField()
 
-class Aithor(models.Model):
+class Author(models.Model):
   name = models.CharField(max_length=32)
   age = models.SmallIntegerField()
-  au_detail = models.OneToOneField('AithorDetail', on_delete=models.CASCADE)
+  au_detail = models.OneToOneField('AuthorDetail', on_delete=models.CASCADE)
 
 class AuthorDetail(models.Model):
   gender_choices = (
@@ -26,6 +26,6 @@ class AuthorDetail(models.Model):
   )
 
   gender = models.SmallIntegerField(choices=gender_choices)
-  tel = models.SmallIntegerField(max_length=32)
+  tel = models.CharField(max_length=32)
   addr = models.CharField(max_length=64)
   birthday = models.DateField()
