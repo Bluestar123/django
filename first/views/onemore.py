@@ -13,6 +13,35 @@ def add_book(request):
   result = {'code': 0, 'msg': '添加成功'}
   return HttpResponse(json.dumps(result), content_type="application/json")
 
+@require_http_methods(['GET'])
+def get_book(request):
+  # pub_obj = model.Publish.objects.filter(pk=1).first()
+  # pub_id = pub_obj.pk
+
+  books = model.Book1.objects.all()
+  temp = []
+  for book in books:
+    res = book.authors.all()
+    authors = []
+    for i in res:
+      authors.append(i.name)
+
+
+    temp.append({
+      'title': book.title,
+      'price': str(book.price),
+      'pub_date': str(book.pub_date),
+      'publish': {
+        'city': book.publish.city,
+        'name': book.publish.name
+      },
+      'authors': authors
+    })
+
+    
+  result = {'code': 0, 'msg': '查询成功', 'data': temp}
+  return HttpResponse(json.dumps(result), content_type="application/json")
+
 @require_http_methods(['POST'])
 def add_author(request):
   # 找到书
